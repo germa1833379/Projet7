@@ -57,20 +57,22 @@ public class main extends Application {
 
         BorderPane bp = new BorderPane();
         bp.setTop(topBar);
-        bp.setCenter(lineChart);
 
         //MENU IMPORTER EVENTS
 
         lignes.setOnAction(event -> {
             File currFile = getFile(fc,primaryStage);
+            if(currFile!=null)
             bp.setCenter(getLineChart(primaryStage,currFile));
         });
         régions.setOnAction(event -> {
             File currFile = getFile(fc,primaryStage);
+            if(currFile!=null)
             bp.setCenter(getAreaChart(primaryStage,currFile));
         });
         barres.setOnAction(event -> {
             File currFile = getFile(fc,primaryStage);
+            if(currFile!=null)
             bp.setCenter(getBarChart(primaryStage,currFile));
         });
         png.setOnAction(event -> {
@@ -84,8 +86,6 @@ public class main extends Application {
         Group root = new Group(bp);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        primaryStage.setWidth(600);
-        primaryStage.setHeight(600);
         primaryStage.setMinWidth(600);
         primaryStage.setMinHeight(600);
     }
@@ -128,7 +128,7 @@ public class main extends Application {
                     try {
                         Integer.parseInt(i);
                     }catch (NumberFormatException e){
-                        e.printStackTrace();
+                        System.out.println("Problème de parse...");
                         canContinue=false;
                         continue;
                     }
@@ -138,7 +138,7 @@ public class main extends Application {
                 Alert alerte = new Alert(Alert.AlertType.INFORMATION);
                 alerte.setTitle("Information Importante");
                 alerte.setHeaderText("Le fichier est problématique");
-                alerte.setContentText("Le nombre de ligne, les informations sont peut-être non conforme. \nAssurez-vous que le fichier a le même nombre de ligne pour les mois et température ainsi que les nombres soit bien des nombres");
+                alerte.setContentText("Le nombre de lignea ou les informations sont peut-être non conforme. \nAssurez-vous que le fichier a le même nombre de ligne pour les mois et température ainsi que les nombres soit bien des nombres");
                 alerte.showAndWait();
             }else {
                 ArrayList<Integer> allNumbers = new ArrayList<>();
@@ -153,7 +153,7 @@ public class main extends Application {
                 lineChart.getData().addAll(series);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Problème de fichier...");
         }
         return lineChart;
     }
@@ -191,7 +191,7 @@ public class main extends Application {
                 try {
                     Integer.parseInt(i);
                 }catch (NumberFormatException e){
-                    e.printStackTrace();
+                    System.out.println("Problème de parse...");
                     canContinue=false;
                     continue;
                 }
@@ -216,7 +216,7 @@ public class main extends Application {
                 chart.getData().addAll(series);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Problème de fichier...");
         }
         return chart;
     }
@@ -254,7 +254,7 @@ public class main extends Application {
                 try {
                     Integer.parseInt(i);
                 }catch (NumberFormatException e){
-                    e.printStackTrace();
+                    System.out.println("Problème de parse...");
                     canContinue=false;
                     continue;
                 }
@@ -279,7 +279,7 @@ public class main extends Application {
                 chart.getData().addAll(series);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Problème de fichier...");
         }
         return chart;
     }
